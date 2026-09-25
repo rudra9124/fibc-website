@@ -2,19 +2,16 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
   CheckCircle2,
-  ChevronDown,
   Factory,
   Globe2,
   Mail,
-  Menu,
   PackageCheck,
   Phone,
   ShieldCheck,
   Truck,
-  X,
 } from "lucide-react";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Navbar } from "@/components/Navbar";
 import heroImage from "@/assets/fibc-hero.jpg";
 import facilityImage from "@/assets/fibc-facility.jpg";
 
@@ -61,48 +58,9 @@ function BrandMark() {
 }
 
 function Index() {
-  const [open, setOpen] = useState(false);
-  const close = () => setOpen(false);
-
   return (
     <main className="min-h-screen overflow-x-hidden bg-background text-foreground">
-      <div className="bg-ink text-ink-foreground">
-        <div className="mx-auto flex min-h-9 max-w-7xl items-center justify-between gap-4 px-5 text-xs">
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-1 py-2">
-            <a href="mailto:sales@fibc.com" className="flex items-center gap-1.5 hover:text-accent"><Mail className="size-3.5" /> sales@fibc.com</a>
-            <a href="tel:+910000000000" className="flex items-center gap-1.5 hover:text-accent"><Phone className="size-3.5" /> +91 00000 00000</a>
-          </div>
-          <span className="hidden items-center gap-2 sm:flex"><Globe2 className="size-3.5" /> Serving global industries</span>
-        </div>
-      </div>
-
-      <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
-        <div className="mx-auto flex h-[74px] max-w-7xl items-center justify-between px-5">
-          <BrandMark />
-          <nav className="hidden items-center gap-7 text-sm font-semibold lg:flex" aria-label="Main navigation">
-            <a className="text-primary" href="#home">Home</a>
-           <Link className="hover:text-primary" to="/about">About Us</Link>
-            <Link className="flex items-center gap-1 hover:text-primary"to="/products">Products <ChevronDown className="size-3.5" /></Link>
-           <Link className="hover:text-primary" to="/quality">Quality</Link>
-            <Link className="hover:text-primary" to="/infrastructure">
-  Infrastructure
-</Link><Link className="hover:text-primary" to="/gallery">
-  Gallery
-</Link>
-            <Button asChild><a href="#contact">Contact Us</a></Button>
-          </nav>
-          <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setOpen(!open)} aria-label="Toggle menu">
-            {open ? <X /> : <Menu />}
-          </Button>
-        </div>
-        {open && (
-          <nav className="border-t border-border bg-background px-5 py-4 lg:hidden" aria-label="Mobile navigation">
-            {["Home", "About", "Products", "Quality", "Infrastructure", "Gallery", "Contact"].map((item) => (
-              <a key={item} onClick={close} className="block border-b border-border py-3 text-sm font-semibold last:border-0" href={`#${item.toLowerCase()}`}>{item}</a>
-            ))}
-          </nav>
-        )}
-      </header>
+      <Navbar />
 
       <section id="home" className="relative min-h-[670px] scroll-mt-28 overflow-hidden lg:min-h-[calc(100vh-110px)]">
         <img src={heroImage} alt="White FIBC bulk bags ready for industrial transport" width={1920} height={1080} className="absolute inset-0 size-full object-cover object-[64%_center]" />

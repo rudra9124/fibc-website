@@ -1,0 +1,736 @@
+diff --git a/src/components/Navbar.tsx b/src/components/Navbar.tsx
+index 62de1d7..ea6c823 100644
+--- a/src/components/Navbar.tsx
++++ b/src/components/Navbar.tsx
+@@ -1,5 +1,5 @@
+ import { Link, useRouterState } from "@tanstack/react-router";
+-import { Menu, X } from "lucide-react";
++import { ChevronDown, Globe2, Mail, Menu, Phone, X } from "lucide-react";
+ import { useState } from "react";
+ import { Button } from "@/components/ui/button";
+ 
+@@ -13,156 +13,177 @@ export function Navbar() {
+   const isActive = (path: string) => pathname === path;
+ 
+   const linkClass = (path: string) =>
+-  isActive(path)
+-    ? "text-primary font-semibold hover:opacity-70 transition-opacity"
+-    : "text-foreground hover:text-primary transition-colors";
+-  return (
+-    <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
+-      <div className="mx-auto flex h-[74px] max-w-7xl items-center justify-between px-5">
+-
+-        {/* Logo */}
+-        <Link
+-          to="/"
+-          className="flex items-center gap-3"
+-          onClick={() => setOpen(false)}
+-        >
+-          <span className="grid size-11 place-items-center bg-primary text-lg font-black text-primary-foreground">
+-            F
+-          </span>
+-
+-          <span>
+-            <strong className="block text-xl font-black leading-none tracking-wide">
+-              FIBC
+-            </strong>
++    isActive(path)
++      ? "text-primary font-semibold hover:opacity-70 transition-opacity"
++      : "text-foreground hover:text-primary transition-colors";
+ 
+-            <small className="mt-1 block text-[9px] font-bold uppercase tracking-[0.18em] text-primary">
+-              Flexible bulk packaging
+-            </small>
++  return (
++    <>
++      {/* Top contact bar */}
++      <div className="bg-ink text-ink-foreground">
++        <div className="mx-auto flex min-h-9 max-w-7xl items-center justify-between gap-4 px-5 text-xs">
++          <div className="flex flex-wrap items-center gap-x-5 gap-y-1 py-2">
++            <a href="mailto:sales@fibc.com" className="flex items-center gap-1.5 hover:text-accent">
++              <Mail className="size-3.5" /> sales@fibc.com
++            </a>
++            <a href="tel:+910000000000" className="flex items-center gap-1.5 hover:text-accent">
++              <Phone className="size-3.5" /> +91 00000 00000
++            </a>
++          </div>
++          <span className="hidden items-center gap-2 sm:flex">
++            <Globe2 className="size-3.5" /> Serving global industries
+           </span>
+-        </Link>
+-
+-        {/* Desktop Navigation */}
+-        <nav className="hidden items-center gap-7 text-sm md:flex">
+-
+-          <Link to="/" className={linkClass("/")}>
+-            Home
+-          </Link>
+-
+-          <Link to="/about" className={linkClass("/about")}>
+-            About Us
+-          </Link>
++        </div>
++      </div>
+ 
+-    <Link to="/products" className={linkClass("/products")}>
+-  Products
+-</Link>
+-          <Link to="/quality" className={linkClass("/quality")}>
+-            Quality
+-          </Link>
++      <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
++        <div className="mx-auto flex h-[74px] max-w-7xl items-center justify-between px-5">
+ 
++          {/* Logo */}
+           <Link
+-            to="/infrastructure"
+-            className={linkClass("/infrastructure")}
++            to="/"
++            className="flex items-center gap-3"
++            onClick={() => setOpen(false)}
+           >
+-            Infrastructure
+-          </Link>
+-
+-          <Link to="/gallery" className={linkClass("/gallery")}>
+-            Gallery
++            <span className="grid size-11 place-items-center bg-primary text-lg font-black text-primary-foreground">
++              F
++            </span>
++
++            <span>
++              <strong className="block text-xl font-black leading-none tracking-wide">
++                FIBC
++              </strong>
++
++              <small className="mt-1 block text-[9px] font-bold uppercase tracking-[0.18em] text-primary">
++                Flexible bulk packaging
++              </small>
++            </span>
+           </Link>
+ 
+-          <Button asChild>
+-            <Link to="/contact">
+-              Contact Us
+-            </Link>
+-          </Button>
+-
+-        </nav>
+-
+-        {/* Mobile Menu Button */}
+-        <button
+-          type="button"
+-          className="grid size-10 place-items-center md:hidden"
+-          onClick={() => setOpen(!open)}
+-          aria-label="Toggle menu"
+-        >
+-          {open ? (
+-            <X className="size-6" />
+-          ) : (
+-            <Menu className="size-6" />
+-          )}
+-        </button>
+-
+-      </div>
+-
+-      {/* Mobile Navigation */}
+-      {open && (
+-        <div className="border-t border-border bg-background md:hidden">
+-
+-          <nav className="mx-auto flex max-w-7xl flex-col px-5 py-4">
++          {/* Desktop Navigation */}
++          <nav className="hidden items-center gap-7 text-sm md:flex" aria-label="Main navigation">
+ 
+-            <Link
+-              to="/"
+-              className={`border-b border-border py-4 ${linkClass("/")}`}
+-              onClick={() => setOpen(false)}
+-            >
++            <Link to="/" className={linkClass("/")}>
+               Home
+             </Link>
+ 
+-            <Link
+-              to="/about"
+-              className={`border-b border-border py-4 ${linkClass("/about")}`}
+-              onClick={() => setOpen(false)}
+-            >
++            <Link to="/about" className={linkClass("/about")}>
+               About Us
+             </Link>
+ 
+             <Link
+               to="/products"
+-              className={`border-b border-border py-4 ${linkClass("/products")}`}
+-              onClick={() => setOpen(false)}
++              className={`flex items-center gap-1 ${linkClass("/products")}`}
+             >
+-              Products
++              Products <ChevronDown className="size-3.5" />
+             </Link>
+ 
+-            <Link
+-              to="/quality"
+-              className={`border-b border-border py-4 ${linkClass("/quality")}`}
+-              onClick={() => setOpen(false)}
+-            >
++            <Link to="/quality" className={linkClass("/quality")}>
+               Quality
+             </Link>
+ 
+-            <Link
+-              to="/infrastructure"
+-              className={`border-b border-border py-4 ${linkClass("/infrastructure")}`}
+-              onClick={() => setOpen(false)}
+-            >
++            <Link to="/infrastructure" className={linkClass("/infrastructure")}>
+               Infrastructure
+             </Link>
+ 
+-            <Link
+-              to="/gallery"
+-              className={`border-b border-border py-4 ${linkClass("/gallery")}`}
+-              onClick={() => setOpen(false)}
+-            >
++            <Link to="/gallery" className={linkClass("/gallery")}>
+               Gallery
+             </Link>
+ 
+-            <Link
+-              to="/contact"
+-              className="mt-4"
+-              onClick={() => setOpen(false)}
+-            >
+-              <Button className="w-full">
++            <Button asChild>
++              <Link to="/contact">
+                 Contact Us
+-              </Button>
+-            </Link>
++              </Link>
++            </Button>
+ 
+           </nav>
+ 
++          {/* Mobile Menu Button */}
++          <button
++            type="button"
++            className="grid size-10 place-items-center md:hidden"
++            onClick={() => setOpen(!open)}
++            aria-label="Toggle menu"
++          >
++            {open ? (
++              <X className="size-6" />
++            ) : (
++              <Menu className="size-6" />
++            )}
++          </button>
++
+         </div>
+-      )}
+ 
+-    </header>
++        {/* Mobile Navigation */}
++        {open && (
++          <div className="border-t border-border bg-background md:hidden">
++
++            <nav className="mx-auto flex max-w-7xl flex-col px-5 py-4" aria-label="Mobile navigation">
++
++              <Link
++                to="/"
++                className={`border-b border-border py-4 ${linkClass("/")}`}
++                onClick={() => setOpen(false)}
++              >
++                Home
++              </Link>
++
++              <Link
++                to="/about"
++                className={`border-b border-border py-4 ${linkClass("/about")}`}
++                onClick={() => setOpen(false)}
++              >
++                About Us
++              </Link>
++
++              <Link
++                to="/products"
++                className={`flex items-center gap-1 border-b border-border py-4 ${linkClass("/products")}`}
++                onClick={() => setOpen(false)}
++              >
++                Products <ChevronDown className="size-3.5" />
++              </Link>
++
++              <Link
++                to="/quality"
++                className={`border-b border-border py-4 ${linkClass("/quality")}`}
++                onClick={() => setOpen(false)}
++              >
++                Quality
++              </Link>
++
++              <Link
++                to="/infrastructure"
++                className={`border-b border-border py-4 ${linkClass("/infrastructure")}`}
++                onClick={() => setOpen(false)}
++              >
++                Infrastructure
++              </Link>
++
++              <Link
++                to="/gallery"
++                className={`border-b border-border py-4 ${linkClass("/gallery")}`}
++                onClick={() => setOpen(false)}
++              >
++                Gallery
++              </Link>
++
++              <Link
++                to="/contact"
++                className="mt-4"
++                onClick={() => setOpen(false)}
++              >
++                <Button className="w-full">
++                  Contact Us
++                </Button>
++              </Link>
++
++            </nav>
++
++          </div>
++        )}
++
++      </header>
++    </>
+   );
+-}
+\ No newline at end of file
++}
+diff --git a/src/routes/about.tsx b/src/routes/about.tsx
+index 029f502..f970e80 100644
+--- a/src/routes/about.tsx
++++ b/src/routes/about.tsx
+@@ -1,6 +1,7 @@
+ import { createFileRoute, Link } from "@tanstack/react-router";
+ import { ArrowRight } from "lucide-react";
+ import { Button } from "@/components/ui/button";
++import { Navbar } from "@/components/Navbar";
+ 
+ export const Route = createFileRoute("/about")({
+   head: () => ({
+@@ -19,46 +20,7 @@ function AboutPage() {
+   return (
+     <main className="min-h-screen bg-background text-foreground">
+ 
+-      {/* Header */}
+-      <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
+-        <div className="mx-auto flex h-[74px] max-w-7xl items-center justify-between px-5">
+-
+-          <Link to="/" className="flex items-center gap-3">
+-            <span className="grid size-11 place-items-center bg-primary text-lg font-black text-primary-foreground">
+-              F
+-            </span>
+-
+-            <span>
+-              <strong className="block text-xl font-black leading-none tracking-wide">
+-                FIBC
+-              </strong>
+-
+-              <small className="mt-1 block text-[9px] font-bold uppercase tracking-[0.18em] text-primary">
+-                Flexible bulk packaging
+-              </small>
+-            </span>
+-          </Link>
+-
+-          <nav className="flex items-center gap-7 text-sm font-semibold">
+-            <Link to="/" className="hover:text-primary">
+-              Home
+-            </Link>
+-
+-            <Link to="/about" className="text-primary">
+-              About Us
+-            </Link>
+-
+-            <Link to="/products" className="hover:text-primary">
+-              Products
+-            </Link>
+-
+-            <Link to="/contact" className="hover:text-primary">
+-              Contact Us
+-            </Link>
+-          </nav>
+-
+-        </div>
+-      </header>
++      <Navbar />
+ 
+       {/* Hero */}
+       <section className="bg-ink py-24 text-ink-foreground">
+diff --git a/src/routes/contact.tsx b/src/routes/contact.tsx
+index 9f3c931..051cc5e 100644
+--- a/src/routes/contact.tsx
++++ b/src/routes/contact.tsx
+@@ -6,6 +6,7 @@ import {
+   Send,
+ } from "lucide-react";
+ import { Button } from "@/components/ui/button";
++import { Navbar } from "@/components/Navbar";
+ 
+ export const Route = createFileRoute("/contact")({
+   head: () => ({
+@@ -25,62 +26,7 @@ function ContactPage() {
+   return (
+     <main className="min-h-screen bg-background text-foreground">
+ 
+-      {/* Header */}
+-      <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
+-        <div className="mx-auto flex h-[74px] max-w-7xl items-center justify-between px-5">
+-
+-          <Link to="/" className="flex items-center gap-3">
+-            <span className="grid size-11 place-items-center bg-primary text-lg font-black text-primary-foreground">
+-              F
+-            </span>
+-
+-            <span>
+-              <strong className="block text-xl font-black leading-none tracking-wide">
+-                FIBC
+-              </strong>
+-
+-              <small className="mt-1 block text-[9px] font-bold uppercase tracking-[0.18em] text-primary">
+-                Flexible bulk packaging
+-              </small>
+-            </span>
+-          </Link>
+-
+-          <nav className="flex items-center gap-7 text-sm font-semibold">
+-
+-            <Link to="/" className="hover:text-primary">
+-              Home
+-            </Link>
+-
+-            <Link to="/about" className="hover:text-primary">
+-              About Us
+-            </Link>
+-
+-            <Link to="/products" className="hover:text-primary">
+-              Products
+-            </Link>
+-
+-            <Link to="/quality" className="hover:text-primary">
+-              Quality
+-            </Link>
+-
+-            <Link to="/infrastructure" className="hover:text-primary">
+-              Infrastructure
+-            </Link>
+-
+-            <Link to="/gallery" className="hover:text-primary">
+-              Gallery
+-            </Link>
+-
+-            <Button asChild>
+-              <Link to="/contact" className="text-primary-foreground">
+-                Contact Us
+-              </Link>
+-            </Button>
+-
+-          </nav>
+-
+-        </div>
+-      </header>
++      <Navbar />
+ 
+       {/* Hero */}
+       <section className="bg-ink py-24 text-ink-foreground">
+diff --git a/src/routes/gallery.tsx b/src/routes/gallery.tsx
+index fac5d18..4527f35 100644
+--- a/src/routes/gallery.tsx
++++ b/src/routes/gallery.tsx
+@@ -1,6 +1,7 @@
+ import { createFileRoute, Link } from "@tanstack/react-router";
+ import { ArrowRight, Image as ImageIcon } from "lucide-react";
+ import { Button } from "@/components/ui/button";
++import { Navbar } from "@/components/Navbar";
+ 
+ export const Route = createFileRoute("/gallery")({
+   head: () => ({
+@@ -53,62 +54,7 @@ function GalleryPage() {
+   return (
+     <main className="min-h-screen bg-background text-foreground">
+ 
+-      {/* Header */}
+-      <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
+-        <div className="mx-auto flex h-[74px] max-w-7xl items-center justify-between px-5">
+-
+-          <Link to="/" className="flex items-center gap-3">
+-            <span className="grid size-11 place-items-center bg-primary text-lg font-black text-primary-foreground">
+-              F
+-            </span>
+-
+-            <span>
+-              <strong className="block text-xl font-black leading-none tracking-wide">
+-                FIBC
+-              </strong>
+-
+-              <small className="mt-1 block text-[9px] font-bold uppercase tracking-[0.18em] text-primary">
+-                Flexible bulk packaging
+-              </small>
+-            </span>
+-          </Link>
+-
+-          <nav className="flex items-center gap-7 text-sm font-semibold">
+-
+-            <Link to="/" className="hover:text-primary">
+-              Home
+-            </Link>
+-
+-            <Link to="/about" className="hover:text-primary">
+-              About Us
+-            </Link>
+-
+-            <Link to="/products" className="hover:text-primary">
+-              Products
+-            </Link>
+-
+-            <Link to="/quality" className="hover:text-primary">
+-              Quality
+-            </Link>
+-
+-            <Link to="/infrastructure" className="hover:text-primary">
+-              Infrastructure
+-            </Link>
+-
+-            <Link to="/gallery" className="text-primary">
+-              Gallery
+-            </Link>
+-
+-            <Button asChild>
+-              <Link to="/contact">
+-                Contact Us
+-              </Link>
+-            </Button>
+-
+-          </nav>
+-
+-        </div>
+-      </header>
++      <Navbar />
+ 
+       {/* Hero */}
+       <section className="bg-ink py-24 text-ink-foreground">
+diff --git a/src/routes/index.tsx b/src/routes/index.tsx
+index ec0f8a8..afcd199 100644
+--- a/src/routes/index.tsx
++++ b/src/routes/index.tsx
+@@ -2,19 +2,16 @@ import { createFileRoute, Link } from "@tanstack/react-router";
+ import {
+   ArrowRight,
+   CheckCircle2,
+-  ChevronDown,
+   Factory,
+   Globe2,
+   Mail,
+-  Menu,
+   PackageCheck,
+   Phone,
+   ShieldCheck,
+   Truck,
+-  X,
+ } from "lucide-react";
+-import { useState } from "react";
+ import { Button } from "@/components/ui/button";
++import { Navbar } from "@/components/Navbar";
+ import heroImage from "@/assets/fibc-hero.jpg";
+ import facilityImage from "@/assets/fibc-facility.jpg";
+ 
+@@ -61,48 +58,9 @@ function BrandMark() {
+ }
+ 
+ function Index() {
+-  const [open, setOpen] = useState(false);
+-  const close = () => setOpen(false);
+-
+   return (
+     <main className="min-h-screen overflow-x-hidden bg-background text-foreground">
+-      <div className="bg-ink text-ink-foreground">
+-        <div className="mx-auto flex min-h-9 max-w-7xl items-center justify-between gap-4 px-5 text-xs">
+-          <div className="flex flex-wrap items-center gap-x-5 gap-y-1 py-2">
+-            <a href="mailto:sales@fibc.com" className="flex items-center gap-1.5 hover:text-accent"><Mail className="size-3.5" /> sales@fibc.com</a>
+-            <a href="tel:+910000000000" className="flex items-center gap-1.5 hover:text-accent"><Phone className="size-3.5" /> +91 00000 00000</a>
+-          </div>
+-          <span className="hidden items-center gap-2 sm:flex"><Globe2 className="size-3.5" /> Serving global industries</span>
+-        </div>
+-      </div>
+-
+-      <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
+-        <div className="mx-auto flex h-[74px] max-w-7xl items-center justify-between px-5">
+-          <BrandMark />
+-          <nav className="hidden items-center gap-7 text-sm font-semibold lg:flex" aria-label="Main navigation">
+-            <a className="text-primary" href="#home">Home</a>
+-           <Link className="hover:text-primary" to="/about">About Us</Link>
+-            <Link className="flex items-center gap-1 hover:text-primary"to="/products">Products <ChevronDown className="size-3.5" /></Link>
+-           <Link className="hover:text-primary" to="/quality">Quality</Link>
+-            <Link className="hover:text-primary" to="/infrastructure">
+-  Infrastructure
+-</Link><Link className="hover:text-primary" to="/gallery">
+-  Gallery
+-</Link>
+-            <Button asChild><a href="#contact">Contact Us</a></Button>
+-          </nav>
+-          <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setOpen(!open)} aria-label="Toggle menu">
+-            {open ? <X /> : <Menu />}
+-          </Button>
+-        </div>
+-        {open && (
+-          <nav className="border-t border-border bg-background px-5 py-4 lg:hidden" aria-label="Mobile navigation">
+-            {["Home", "About", "Products", "Quality", "Infrastructure", "Gallery", "Contact"].map((item) => (
+-              <a key={item} onClick={close} className="block border-b border-border py-3 text-sm font-semibold last:border-0" href={`#${item.toLowerCase()}`}>{item}</a>
+-            ))}
+-          </nav>
+-        )}
+-      </header>
++      <Navbar />
+ 
+       <section id="home" className="relative min-h-[670px] scroll-mt-28 overflow-hidden lg:min-h-[calc(100vh-110px)]">
+         <img src={heroImage} alt="White FIBC bulk bags ready for industrial transport" width={1920} height={1080} className="absolute inset-0 size-full object-cover object-[64%_center]" />
+diff --git a/src/routes/infrastructure.tsx b/src/routes/infrastructure.tsx
+index 6224185..430a89c 100644
+--- a/src/routes/infrastructure.tsx
++++ b/src/routes/infrastructure.tsx
+@@ -8,6 +8,7 @@ import {
+   Workflow,
+ } from "lucide-react";
+ import { Button } from "@/components/ui/button";
++import { Navbar } from "@/components/Navbar";
+ 
+ export const Route = createFileRoute("/infrastructure")({
+   head: () => ({
+@@ -50,62 +51,7 @@ function InfrastructurePage() {
+   return (
+     <main className="min-h-screen bg-background text-foreground">
+ 
+-      {/* Header */}
+-      <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
+-        <div className="mx-auto flex h-[74px] max-w-7xl items-center justify-between px-5">
+-
+-          <Link to="/" className="flex items-center gap-3">
+-            <span className="grid size-11 place-items-center bg-primary text-lg font-black text-primary-foreground">
+-              F
+-            </span>
+-
+-            <span>
+-              <strong className="block text-xl font-black leading-none tracking-wide">
+-                FIBC
+-              </strong>
+-
+-              <small className="mt-1 block text-[9px] font-bold uppercase tracking-[0.18em] text-primary">
+-                Flexible bulk packaging
+-              </small>
+-            </span>
+-          </Link>
+-
+-          <nav className="flex items-center gap-7 text-sm font-semibold">
+-
+-            <Link to="/" className="hover:text-primary">
+-              Home
+-            </Link>
+-
+-            <Link to="/about" className="hover:text-primary">
+-              About Us
+-            </Link>
+-
+-            <Link to="/products" className="hover:text-primary">
+-              Products
+-            </Link>
+-
+-            <Link to="/quality" className="hover:text-primary">
+-              Quality
+-            </Link>
+-
+-            <Link to="/infrastructure" className="text-primary">
+-              Infrastructure
+-            </Link>
+-
+-            <Link to="/gallery" className="hover:text-primary">
+-              Gallery
+-            </Link>
+-
+-            <Button asChild>
+-              <Link to="/contact">
+-                Contact Us
+-              </Link>
+-            </Button>
+-
+-          </nav>
+-
+-        </div>
+-      </header>
++      <Navbar />
+ 
+       {/* Hero */}
+       <section className="bg-ink py-24 text-ink-foreground">
+diff --git a/src/routes/quality.tsx b/src/routes/quality.tsx
+index d818fd2..64faecb 100644
+--- a/src/routes/quality.tsx
++++ b/src/routes/quality.tsx
+@@ -7,6 +7,7 @@ import {
+   Factory,
+ } from "lucide-react";
+ import { Button } from "@/components/ui/button";
++import { Navbar } from "@/components/Navbar";
+ 
+ export const Route = createFileRoute("/quality")({
+   head: () => ({
+@@ -44,52 +45,7 @@ function QualityPage() {
+   return (
+     <main className="min-h-screen bg-background text-foreground">
+ 
+-      {/* Header */}
+-      <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
+-        <div className="mx-auto flex h-[74px] max-w-7xl items-center justify-between px-5">
+-
+-          <Link to="/" className="flex items-center gap-3">
+-            <span className="grid size-11 place-items-center bg-primary text-lg font-black text-primary-foreground">
+-              F
+-            </span>
+-
+-            <span>
+-              <strong className="block text-xl font-black leading-none tracking-wide">
+-                FIBC
+-              </strong>
+-
+-              <small className="mt-1 block text-[9px] font-bold uppercase tracking-[0.18em] text-primary">
+-                Flexible bulk packaging
+-              </small>
+-            </span>
+-          </Link>
+-
+-          <nav className="flex items-center gap-7 text-sm font-semibold">
+-
+-            <Link to="/" className="hover:text-primary">
+-              Home
+-            </Link>
+-
+-            <Link to="/about" className="hover:text-primary">
+-              About Us
+-            </Link>
+-
+-            <Link to="/products" className="hover:text-primary">
+-              Products
+-            </Link>
+-
+-            <Link to="/quality" className="text-primary">
+-              Quality
+-            </Link>
+-
+-            <Link to="/contact" className="hover:text-primary">
+-              Contact Us
+-            </Link>
+-
+-          </nav>
+-
+-        </div>
+-      </header>
++      <Navbar />
+ 
+       {/* Hero */}
+       <section className="bg-ink py-24 text-ink-foreground">

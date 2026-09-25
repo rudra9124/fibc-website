@@ -7,6 +7,7 @@ import {
   Factory,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Navbar } from "@/components/Navbar";
 
 export const Route = createFileRoute("/quality")({
   head: () => ({
@@ -44,52 +45,7 @@ function QualityPage() {
   return (
     <main className="min-h-screen bg-background text-foreground">
 
-      {/* Header */}
-      <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
-        <div className="mx-auto flex h-[74px] max-w-7xl items-center justify-between px-5">
-
-          <Link to="/" className="flex items-center gap-3">
-            <span className="grid size-11 place-items-center bg-primary text-lg font-black text-primary-foreground">
-              F
-            </span>
-
-            <span>
-              <strong className="block text-xl font-black leading-none tracking-wide">
-                FIBC
-              </strong>
-
-              <small className="mt-1 block text-[9px] font-bold uppercase tracking-[0.18em] text-primary">
-                Flexible bulk packaging
-              </small>
-            </span>
-          </Link>
-
-          <nav className="flex items-center gap-7 text-sm font-semibold">
-
-            <Link to="/" className="hover:text-primary">
-              Home
-            </Link>
-
-            <Link to="/about" className="hover:text-primary">
-              About Us
-            </Link>
-
-            <Link to="/products" className="hover:text-primary">
-              Products
-            </Link>
-
-            <Link to="/quality" className="text-primary">
-              Quality
-            </Link>
-
-            <Link to="/contact" className="hover:text-primary">
-              Contact Us
-            </Link>
-
-          </nav>
-
-        </div>
-      </header>
+      <Navbar />
 
       {/* Hero */}
       <section className="bg-ink py-24 text-ink-foreground">
